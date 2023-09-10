@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ai_solutions.css' %}"/>
+{% endblock %}
+{% block title %}Virtual Reality Forest Therapy{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Smart Home
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:smart_curtain' 1 %}">Smart Curtain</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Forest Therapy
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:virtual_reality_forest_therapy' 1 %}">Virtual Reality Forest
+                Therapy</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Monthly Service Product</a></li>
+                <li><a class="dropdown-item" href="#">International FT Tour</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">Small Farmers</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'main:virtual_reality_forest_therapy' 1 %}"><i class='fa fa-arrow-left'></i>Back</i></a><br/>
+<div style="margin-left: 17%;margin-right: 17%;">
+    <p style="text-align: center; font-family: Impact; font-size: 50px;">森林康养 - 数字孪生型森林康养</p><br><br>
+
+    <ol>
+        <li><h3 style="color: red;">全范式森林（林相）的智能传感量化建模</h3></li>
+        <ul>
+            <li><h5>无人机航空遥感(区域)</li></h5>
+            <li><h5>无人机航空遥感(区域)</h5></li>
+            <li><h5>地面全天候智能监测(微观)</h5></li>
+                <ul>
+                    <li><h5>无人车和VSLAM的地面建模</h5></li>
+                    <li><h5>芬多精的化学分析实时监测(电子鼻)和动态建模</h5></li>
+                </ul>
+            <li><h5>大数据分析和建模</h5></li>
+                <ul>
+                    <li><h5>群体智能：烟花算法</h5></li>
+                    <li><h5>森林浴的林相分析和大数据建模</h5></li>
+                </ul>
+        </ul>
+
+        <br/>
+        <li><h3 style="color:red">基于森相的科学康养计划定制化设计和标准化 </h3></li>
+        <ul><h5>森林康养基地培训森林康养师, 设计森林康养课程, 提供（国际通用模式的）医学实证数据等</h5></ul>
+
+        <br/>
+        <li><h3 style="color:red">居家森林康养的SaaS</h3></li>
+            <ul>
+                <li><h5>元宇宙：五官森林沉浸式VR的居家康养服务</h5></li>
+                <li><h5>康养型智能家居家电</h5></li>
+                <li><h5>可穿戴的4高群体实时监控(CGM/ECG/sleeping)</h5></li><br/>
+            </ul>
+    </ol>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <p style="text-align: center; font-family: Impact; font-size: 50px;">VR Plan</p><br><br>
+    <br/>
+    <br/>
+    <div style="text-align: center;">
+        <img style="height: 40%; width: 40%;" src="/media/vr_plan.png">
+    </div>
+    <div style="text-align: center;">
+        <img style="height: 20%; width: 20%;" src="/media/(3).png">
+        <img style="height: 20%; width: 20%;" src="/media/(4).png">
+        <figcaption>(3) & (4)</figcaption>
+    </div>
+    <br/>
+    <ul>
+        <li><h4>A面：两扇窗前均装智能窗帘(1)</h4></li><br/>
+        
+        <li><h4>带照明</h4></li><br/>
+        <li><h4>在B面装75寸电视(2)</h4></li>
+        <ul>
+            <li><h6>电视位于C面到B面柱子之前墙面的中心(图中电视机距C面墙2米4为估算，以保证电视处于中心为准)</h6></li>
+            <li><h6>电视机中心点(注意不是下缘)离地约1.3米，达到舒适的观看高度</h6></li>
+        </ul>
+        <br/>
+        <li><h4>离电视机屏幕约3.0米处开始排九张志愿者桌椅(3)，第一排两张，第二排三张，第三排四张，交错排开，最后一排不超过隔间打开的门</h4></li><br/>
+        <li><h4>志愿者桌椅</h4></li>
+            <ul>
+                <li><h6>颜色选用木色</h6></li>
+                <li><h6>桌面大小约80cm*45cm</h6></li>
+            </ul>
+            <br/>
+        <li><h4>从E面柱子开始隔出一个约3.6米*3.1米的研究员隔间</h4></li><br/>
+        <li><h4>按图所示放置文件柜（4），和研究员桌椅及电脑（5）</h4></li><br/>
+        <li><h4>（6）摆放电视机柜及带底座的42寸电视，E面预留电源插座及网线给电视机</h4></li><br/>
+        <li><h4>此研究员隔间可作单人实验室，更接近居家环境</h4></li><br/>
+        <li><h4>电源插座及网线分布</h4></li>
+            <ul>
+                <li><h6>留电源插座给智能窗帘</h6></li>
+                <li><h6>留五孔电源插座给智能窗帘和研究员的笔记本电脑，至少4组插座，可以分布在左侧及窗边墙面</h6></li>
+                <li><h6>多留插座是考虑到不只有一名研究员的情况，以及研究员可能需要在隔间内调试设备</h6></li>
+                <li><h6>地面插座，都为五孔，保证每一张志愿者桌可以利用两组插座</h6></li>
+                <li><h6>留电源插座及网线接口给两台电视机</h6></li>
+                <li><h6 style="color:red">⚠️用电总功率约为4500W（所有志愿者均使用笔记本电脑和医用精神压力检测仪的情况下，未加照明系统）⚠️</h6></li>
+            </ul>
+    </ul>
+
+    
+            
+
+</div>
+<a href="{% url 'main:virtual_reality_forest_therapy' 1 %}"><i class='fa fa-arrow-left'></i>Back</i></a><br/>
+{% endblock %}

@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"
+            integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"
+            integrity="sha512-fHXRw0CXruAoINU11+hgqYvY/PcsOWzmj0QmcSOtjlJcqITbPyypc8cYpidjPurWpCnlB8VKfRwx6PIpASCUkQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/1fb9f38c90.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+    <script src="{% static 'js/animation.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    {% block resource %}{% endblock %}
+    <title>{% block title %}SmartPlanting{% endblock %}</title>
+    {% block head_script %}{% endblock %}
+</head>
+
+<body>
+<div class="header">
+    <nav class="navbar-expand-lg navbar navbar-dark" style="background-color: #114934;">
+        <div class="container-fluid base-container">
+            {% block nav_brand %}{% endblock %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% block nav_items %}{% endblock %}
+                </ul>
+                <ul class="nav justify-content-end icon-group">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" role="button"><i
+                                class="fas fa-search"></i></a>
+                    </li>
+                    {% if request.session.user_id %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button"
+                               data-bs-display="static"
+                               aria-expanded="false"><i
+                                    class="fas fa-user"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                                <li><a class="dropdown-header"
+                                       href="{% url 'authentication:user'  request.session.username %}">{{ request.session.username }}</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">My order</a></li>
+                                <li><a class="dropdown-item" href="{% url 'main:my_share' %}">My share</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'authentication:logout' %}">Log out</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button"
+                               data-bs-display="static"
+                               aria-expanded="false"><i class="fas fa-shopping-bag"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start cart" id="cart">
+                                <li><span class="dropdown-item"><i class="fas fa-shopping-cart"></i></span></li>
+                                
+                                <li><a class="dropdown-item" href="/cart">Shopping Cart</a></li>
+
+                                {#                                <li><span class="dropdown-header"><i class="fas fa-shopping-cart"></i> Cart</span></li>#}
+                                {#                                <li>#}
+                                {#                                    <hr class="dropdown-divider">#}
+                                {#                                </li>#}
+                                {#                                <li><p class="dropdown-item">Curtain x1</p></li>#}
+                                {#                                <li>#}
+                                {#                                    <hr class="dropdown-divider">#}
+                                {#                                </li>#}
+                                {#                                <li><a class="dropdown-item" href="#">Go to Cart</a></li>#}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'authentication:login' %}"><i
+                                    class="fas fa-user"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'authentication:login' %}"><i
+                                    class="fas fa-shopping-bag"></i></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="content">
+    {% block content %}{% endblock %}
+    <div class="footer" id="footer">
+        <div class="container-fluid base-container">
+            <div class="row">
+                <div class="col-lg footer-div footer-div-left footer-div-from-up">
+                    <div class="footer-text">
+                        <h1>Get In Touch</h1>
+                        <p>
+                            250 W Tasman Dr<br/>
+                            San Jose, CA 95134<br/>
+                            Phone: +1 408-418-6388<br/>
+                            Fax: +1775 240 9793<br/>
+                            Email: Support@visionx.org<br/>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg footer-div footer-div-from-down">
+                    <div class="footer-text">
+                        <h1>About Us</h1>
+                        <p>
+                            Smart home is a cross-industry which focus on plant care.
+                            Our company has designed and developed a set of artificial intelligence to automatically
+                            identify
+                            each Flowers and trees and their growth status, combined with real-time geographic and
+                            climate
+                            conditions, using big data analysis and timely prediction and guidance on the healthy growth
+                            conditions of flowers and trees.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg footer-div footer-div-right footer-div-from-up">
+                    <div class="footer-text">
+                        <h1>Join Us Now!</h1>
+                        <p>
+                            We are active on Twitter, <br/>
+                            Telegram, Medium, Reddit, <br/>
+                            YouTube, Instagram, <br/>
+                            Facebook, LinkedIn, GitHub <br/>
+                            and Coinmarketcap.
+                        </p>
+                        <div class="social-media-icon-group">
+                            <ul class="social-media-icon-group-ul">
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-telegram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-medium"></i></a></li>
+                                <li><a href="#"><i class="fab fa-reddit-alien"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-github"></i></a></li>
+                                <li><a href="#">
+                                    <img src="{% static 'img/coinmarketcap.svg' %}" class="filter-blue"/>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright" id="footer_copyright">
+        <div class="container-fluid base-container">
+            <div class="row">
+                <div class="col-lg footer-copyright-from-left">
+                    <p>Copyright © 2020 Visionx Llc</p>
+                </div>
+                <div class="col-lg footer-copyright-from-right">
+                    <p>Powered By <a href="https://www.visionx.org">Visionx Llc</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block script %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ai_solutions.css' %}"/>
+{% endblock %}
+{% block title %}Virtual Reality Forest Therapy{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Smart Home
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:smart_curtain' 1 %}">Smart Curtain</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Forest Therapy
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:virtual_reality_forest_therapy' 1 %}">Virtual Reality Forest
+                Therapy</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">Small Farmers</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div style="margin-left: 10%;margin-right: 10%;">
+    <a href="{% url 'main:virtual_reality_forest_therapy' 1 %}"><i class='fa fa-arrow-left'></i>Back</a><br/>
+    <h1 style="text-align: center;">
+    Digital Twin
+    </h1>
+    <div>
+        <img style="height: 42%; width: 42%; float:right" src="/media/digital_twin1.png"><br/>
+    </div>
+    <p>2008 年 11 月，在美国纽约召开的外国关系理事会上, IBM 提出了“智慧地球”这一理念，引发了智慧城市建设的热潮。
+    近年来，一些国家将数字孪生应用于智慧城市建设，
+    如 2016 年新加坡与美国麻省理工学院合作的CityScope 为新加坡城市规划量身定制城市运行仿真系统；
+    在欧盟 800 万欧元资助下，西班牙智慧桑坦德在城市中广泛部署传感器，感知城市环境、交通、水利等运行情况， 
+    并将数据汇聚到智慧城市平台中的城市仪表盘，初步形成了数字孪生城市的雏形，成为欧洲可推广的模板之一。
+    当前，数字孪生主要应用于城市规划和管理方面，未来将向城市服务方面扩展，通过服务场景、服务对象、服务内容等方面的数字孪生系统构建，
+    引发服务模式向虚实结合、情景交融、个性化、主动化方向加速转变</p><br/>
+    
+    <p style="color:red;">数字孪生技术是未来10年最有潜力的战略科技趋势之一, 利用物理模型、传感器更新、运行历史等数据, 
+        集成多学科、多物理量、多尺度、多概率的仿真过程, 在虚拟模型中完成映射, 从而反映相对应的实体装备的全生命周期过程。
+        数字孪生已经被列入国家战略, 随着5G全面启动加速赋能各行各业
+    </p>
+
+    <br/><br/><br/><br/>
+    <h1 style="text-align: center;">森林康养产业</h1>
+    <br/>
+    <div>
+        <img style="height: 21%; width: 30%; float:left" src="/media/digital_twin2.png">
+    </div>
+    
+    <div>
+        <img style="height: 25%; width: 34%; float:left" src="/media/digital_twin3.png">
+    </div>
+
+    <p><b style="font-size: large;">森林医学</b>是从医学的角度研究森林对人体所具有的治疗、康复、保健和疗养功能的一门边缘学科</p>
+    
+    <p><b style="font-size: large;">森林疗养</b>是通过让参与人员置身于森林之中，有效地利用森林环境，同时辅助其他必要的疗法和人为干预，通过享受森林带来的愉悦和快乐的同时，达到疾病预防、减压、康复、保健等效果的替代治疗方法</p>
+
+    <p><b style="font-size: large;">森林养生</b>是指游客选取适合养生的森林区域，通过参加养生项目达到内在心理轻松和外在身体健康的良好状态的一种旅游方式</p>
+    
+    <p><b style="font-size: large;">森林旅游</b>是指任何形式的到林区(地)从事旅游活动，这些活动不管是直接利用森林还是间接以森林为背景。森林旅游可以理解为依托森林及其环境而开展的一切旅游活动</p><br/>
+
+    <div>
+        <li>
+            <p style="color: red;">以科学的健康知识为支撑 ：森林康养不是一般意义上的森林旅游，必须以科学的健康知识为支撑的。 任何一个森林康养项目的建设，任何一个森林康养产品的开发，都必须有科学的健康理论和健康知识作为指导。</p>
+        </li>
+        <li>
+            <p style="color: red;">以完善的森林康养产品为依托：完善的森林康养产品体系，一是需要尽可能多地满足不同人群康养需求的森林康养产品。 二是根据不同森林特色针对不同人群的康养需求，通过定制康养程序的方式把同类需求的康养产品将森林康养和居家康养串联起来，开展森林康养活动。</p>
+        </li>
+        <li>
+            <p style="color: red;">以完备的配套设施为保障：完备的森林康养配套设置包括森林康养基地外部，内部的配套设施和居家森林康养设施。</p>
+        </li>
+    </div>
+
+    <br/><br/><br/><br/>
+
+    <h1 style="text-align: center;">森林康养产品</h1>
+    <br/>
+    <table>
+        <tr>
+          <th>分类依据</th>
+          <th>产品类型</th> 
+        </tr>
+        <tr>
+          <td>消费对象年龄</td>
+          <td>少儿型、青年型、中年型和老年型４个层次消费对象 </td> 
+        </tr>
+        <tr>
+          <td>健康程度 </td>
+          <td>健康类、亚健康类和不健康类３ 个层次消费对象 </td> 
+        </tr>
+        <tr>
+            <td>主导需求 </td>
+            <td>养身型、养心型、 养性型、 养智型、 养德型和复合型 6种需求</td> 
+          </tr>
+          <tr>
+            <td>费用 </td>
+            <td>免费类、 低收费类、 中收费类和高收费类 4种水平</td> 
+          </tr>
+          <tr>
+            <td>产品体系 </td>
+            <td>单一型森林康养产品、少类型森林康养产品、多类型森林康养产品和森林康养综合体４种 </td> 
+          </tr>
+          <tr>
+            <td>建设主体 </td>
+            <td>政府、集体、企业、家庭、非政府组织和混合主体等</td> 
+          </tr>
+          <tr style="color: red;">
+            <td>产品内容 </td>
+            <td>森林主导康养、 森林运动康养、 森林体验康养 、森林辅助康养、 森林科普、宣教康养、 健康管理服务 6种</td> 
+          </tr>
+      </table>
+
+    <br/><br/><br/><br/>
+
+    <h1 style="text-align: center;">数字孪生技术-森林康养产业</h1><br/>
+        <p style="color: red;">建设数字孪生智能平台，更好地实现全方位空间信息、物理化学生物世界全要素智能传感和克隆呈现，支持超大自然森林环境群尺度还原、全要素场景、真实世界5感仿真模拟和软硬件平台弹性扩展，实习森林康养和居家森林康养的协同服务创新</p>
+        <p><small>我们致力于构建视觉计算及人工智能领域开发平台，研发全球领先的自主创新人工智能跨行业解决方案和去中心化的分布式高性能计算生态系统。我们基于联邦学习的统一架构开发的具有全场景综合算力，能够同时进行3D实时渲染，人工智能计算及高清视频编解码等任务，和数字孪生PaaS平台深度结合。智慧森林康养是数字孪生技术的重要应用领域。基于数字孪生底座的自然环境CIM平台（生态信息模型），能够将项目管理数据、空间GIS（地理信息系统）和BIM（建筑信息模型）等信息有效结合，构建自然环境全要素场景，用于自然资源，森林康养基地等公共事业和资产管理，以执行虚拟监控和检查。同时，基于自动语义分割和分类的深度学习模型，数字孪生技术可以支持在不同时间尺度上创建、渲染和分析地理空间特征数据，帮助居家森林康养，森林康养基地管理者、规划者和建设者更好地协作进行基础设施管理，运营和优化，实现最佳的康养效果和体验。
+            目前全球的森林康养产业方兴未艾。中国现有3000个国家级森林康养基地，7000个城市森林公园正在进行规划和建设。成都市作为唯一一个国家级森林康养基地示范城市，我们成都数字孪生技术研究院将推进数字孪生创新技术应用于森林康养产业为中国下一阶段的森林康养基地的服务和发展奠定了基础。坚持森林康养和居家康养的同步规划、同步建设，适度超前布局智能基础设施，助力打造全球领先的森林康养产业。</small></p>
+        <p style="color: red;">智能健康数字孪生技术研究院将打造一个全行业的数字孪生平台，致力于创造一个真实、完整且恒久的数字孪生世界。以原创的全要素场景（All Element Scene，简称AES）为基础，融合卫星遥感，物理，化学和生物智能传感和模拟、工业仿真、人工智能、云计算等技术建立数字孪生应用生态，帮助政府及企业进行新一轮数字化产业升级，并推动数字孪生成为新型基础设施之一。</p>
+        <br/><br/>
+    <a href="{% url 'main:virtual_reality_forest_therapy' 1 %}"><i class='fa fa-arrow-left'></i>Back</a><br/><br/>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/consulting.css' %}"/>
+{% endblock %}
+{% block title %}Consulting{% endblock %}
+{% block head_script %}
+
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link title1 active" href="{% url 'main:consulting' %}">Consulting</a>
+</li>
+    <a class="nav-link title2" style="margin-left: 20%;" href="{% url 'main:create_post' %}">New Post</a>
+    <a class="nav-link title2" style="margin-left: 20%;" href="https://visionx.org/teams.html">Our Experts</a>
+    
+    
+{% endblock %}
+
+{% load tz %}
+
+{% block content %}
+<h1>Shopping Cart</h1>
+<ul>
+{% for item in cart_items %}
+    <li>{{ item.product.name }} x{{ item.quantity }}: ${{ item.price }}</li>
+{% endfor %}
+</ul>
+<p>Total: ${{ cart.total_price }}</p>
+{% endblock %}

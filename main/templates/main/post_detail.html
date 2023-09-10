@@ -1,0 +1,156 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/consulting.css' %}"/>
+{% endblock %}
+{% block title %}Post Detail{% endblock %}
+{% block head_script %}
+   
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:consulting' %}">Consulting</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="{% url 'main:create_post' %}">New Post</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div>
+
+<div
+    style="margin-left:15%;margin-right:15%;">
+    <ul>
+        <h2
+            style="text-align: center; font-size:45px">
+                {{ post.title }}
+        </h2>
+        <div>
+            <small>
+            
+            <div style="display:inline-block; text-align: center; width: 100%;">
+                <small> Views: {{post.post_views}} </small> | 
+                <small> Comments: {{post.num_comments}} </small> | 
+                <small> Author: {{post.author}} </small> |
+                <small> Date: {{post.date_added}}(UTC) </small>
+            </div>
+
+            </small>
+        </div>
+        <HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="100%" color=#987cb9 SIZE=3>
+        <br/> 
+        <br/>
+
+        {% if post.image %}
+        
+        <img style="display: block; margin-left: auto;margin-right: auto; width: 50%;" src = "{{ post.image.url }}">
+        <br/><br/>
+        {% endif %}
+        
+        <h3 style="display:contents; font-size:23px;font-family:verdana"> {{ post.content|linebreaks }} </h3>
+        <br/>
+
+        
+        <ul class= "rating-list">
+            <li onclick="rate(5, {{ post.pk }})">
+                <i class="fa fa-star {% if post.user_rating > 4 %} checked {% endif %}" title="Rate 5"></i></li>
+            <li onclick="rate(4, {{ post.pk }})">
+                <i class="fa fa-star {% if post.user_rating > 3 %} checked {% endif %}" title="Rate 4"></i></li>
+            <li onclick="rate(3, {{ post.pk }})">
+                <i class="fa fa-star {% if post.user_rating > 2 %} checked {% endif %}" title="Rate 3"></i></li>
+            <li onclick="rate(2, {{ post.pk }})">
+                <i class="fa fa-star {% if post.user_rating > 1 %} checked {% endif %}" title="Rate 2"></i></li>
+            <li onclick="rate(1, {{ post.pk }})">
+                <i class="fa fa-star {% if post.user_rating > 0 %} checked {% endif %}" title="Rate 1"></i></li>
+        </ul>
+        <HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="100%" color=#987cb9 SIZE=3>
+        
+        <br/>
+        
+        <form action = "{% url 'main:like_post' post.pk %}"
+        method="POST">
+        {% csrf_token %}
+        <button type="submit" src="/media/like_images.png" name="post_id" class="btn btn-primary btn-sm" value="{{ post.id }}" /> 
+        {% for user in post.likes.all %}
+            {% if user.name == request.session.username %}
+                Cancel
+            {% endif %}
+        {% endfor %}
+        like
+        </button>
+        -
+        <img style="height:25px;display: inline-block;" src="/media/like_images.png">
+        {{ num_likes }} 
+        Likes
+        
+        </form>
+        <br/><br/>
+        <h1 style="text-align: center;color:white;background-color:#114934">
+            Comments......
+        </h1>
+        <br/>
+        {% if not post.comments.all %}
+                No Comments Yet... Be the first to comment on this
+                <br/><a href="{% url 'main:add_comment' post.pk %}">Add Comment</a>
+        {% else %}
+            
+            <br/>
+            <div style="display:inline-block; width: 1000px; height: 600px;">
+                {% for comment in post.comments.all %}
+                
+                <img style="float:left; display: block; height: 15%; width: 9%; border-radius: 50%;" src = "{{comment.get_user.profile.url}}"><br/>
+            
+                <strong>
+                    &nbsp {{comment.name}}<br/>
+                    &nbsp {{comment.date_added}}
+                </strong>
+                <hr>
+                <br/>
+                {{comment.content|linebreaks}}
+                <br/>
+                <br/>
+                
+                {% endfor %}
+            </div>
+                <!--
+                    <a href="{% url 'main:add_comment' post.pk %}"><div style="text-align:center">
+                    Add Comment
+                </div>
+                -->
+                <br/><br/>
+                <a href="{% url 'main:add_comment' post.pk %}">Add Comment</a>
+                
+        {% endif %}
+        
+
+        <br/><br/><br/><br/>
+        <a href="{% url 'main:consulting' %}">Back</a><br/><br/>
+    </ul>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const rate = (rating, post_id) => {
+            fetch(`/consulting/${post_id}/${rating}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(rest => {
+                window.location.reload();
+                // you may want to update the rating here
+                // to simplify stuff, I just reload the page
+            })
+        }
+    </script>
+{% endblock %} 

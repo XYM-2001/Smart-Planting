@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ai_solutions.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sub_ai_solutions.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/smart_curtain_animation.css' %}"/>
+{% endblock %}
+{% block title %}Smart Curtain{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Smart Home
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:smart_curtain' 1 %}">Smart Curtain</a></li>
+            <li><a class="dropdown-item" href="#">Sensing System</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="{% url 'main:ai_classification' %}">AI Classification</a></li>
+            <li><a class="dropdown-item" href="#">AI Disease Diagnose</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Forest Therapy
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:virtual_reality_forest_therapy' 1 %}">Virtual Reality Forest
+                Therapy</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Monthly Service Product</a></li>
+
+                <li><a class="dropdown-item" href="#">International FT Tour</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">Small Farmers</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {% if load_animation %}
+        <div class="animation" id="animation"></div>
+        <div class="curtain-animation" id="animation2">
+            <div class="animation-left"></div>
+            <div class="animation-right"></div>
+        </div>
+    {% endif %}
+    <div class="container-fluid base-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Smart Curtain</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="content1">
+        <div style="background-color: #f5f5f5">
+            <div class="container-fluid base-container intro smart-curtain-intro">
+                <div class="smart-curtain">
+                    <h1 class="smart-curtain-title">SwitchBot Curtain</h1>
+                    <h3 class="smart-curtain-description">Make your curtain smart in seconds</h3>
+                    <div>
+                        <div class="smart-curtain-button">
+                            <a href="/checkout/?total=200000" type="button" class="btn buy-now" role="button">Buy Now</a>
+                            <a type="button" class="btn learn-more" role="button">Learn More <i
+                                    class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="light-display">
+        <div class="base-container" style="height: 100%">
+            <div class="light-img"></div>
+            <div class="canopy">
+                <div class="shadow-left" id="shadow-left"></div>
+                <div class="shadow-right" id="shadow-right"></div>
+            </div>
+            <div class="progress">
+                <input class="progress-bar" role="progressbar" style="width: 25%;" type="range" id="lightness"
+                       name="lightness" value="0"
+                       min="0" max="100">
+                <label for="lightness">Lightness</label>
+            </div>
+        </div>
+    </div>
+    <div class="content2">
+        <div class="container-fluid base-container">
+            <h1 class="best-seller">Best Seller</h1>
+            <div class="row">
+                {% for product in product_list %}
+                    <div class="col-sm-6 col-lg-4 col-xl-3 content2-div">
+                        <img class="item-img" src="{{ MEDIA_URL }}{{ product.image }}" alt="Item">
+                        <div class="content2-div-text">
+                            <h5>
+                                {{ product.description }}
+                            </h5>
+                            <div class="ratings">
+                                {% for rating in product.rating %}
+                                    <i class="fa fa-star rating-color"></i>
+                                {% endfor %}
+                                {% for zeroRating in product.zeroRating %}
+                                    <i class="fa fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            <h5>Price: ${{ product.price }}</h5>
+                            <button type="button" class="btn btn-primary add-to-cart">Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row page-nav">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg justify-content-center" id="pagination">
+                        {% if pagination.previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'main:smart_curtain' pagination.previous_page %}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for page in pagination.left %}
+                            {% if page == pagination.current %}
+                                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="{% url 'main:smart_curtain' page %}">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="page-item"><span class="page-link">...</span></li>
+                        {% if 0 != pagination.right and  pagination.right > pagination.current %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{% url 'main:smart_curtain' pagination.right %}">{{ pagination.right }}</a>
+                            </li>
+                        {% endif %}
+                        {% if pagination.next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'main:smart_curtain' pagination.next_page %}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        setTimeout(function () {
+            document.getElementById("animation").style.display = "none";
+            document.getElementById("animation2").style.display = "none";
+        }, 7000);
+
+        document.getElementById("lightness").addEventListener('input', (event) => {
+            var percentage = parseInt(event.target.value);
+            if (percentage < 50) {
+                document.getElementById("shadow-left").style.background = "linear-gradient(" + (percentage / 2 + 90) + "deg, #333 " + (100 - percentage) + "%, transparent " + percentage + "%)";
+                document.getElementById("shadow-right").style.background = "linear-gradient(" + (-(percentage / 2 + 90)) + "deg, #333 " + (100 - percentage) + "%, transparent " + percentage + "%)";
+            } else {
+                document.getElementById("shadow-left").style.background = "linear-gradient(" + (percentage / 2 + 90) + "deg, #333 " + (100 - percentage) + "%, transparent 0";
+                document.getElementById("shadow-right").style.background = "linear-gradient(" + (-(percentage / 2 + 90)) + "deg, #333 " + (100 - percentage) + "%, transparent 0";
+            }
+        });
+    </script>
+{% endblock %}

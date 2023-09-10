@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+{% endblock %}
+{% block title %}
+    SmartPlanting
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand active" href="{% url 'main:index' %}">SmartPlanting</a>
+    <span class="vl hide-vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title1" href="{% url 'main:consulting' %}">Consulting</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title1" href="#">Third Party</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="content1">
+        <div class="container-fluid base-container">
+            <div class="shop-now">
+                <h1 class="think-about-title">When you think of plant <br/>think about us</h1>
+                <p class="think-about-intro">
+                    Plants, AI solutions for planting, Professional consulting... We have everything you need for
+                    plants.
+                </p>
+                <div>
+                    <div class="shop-now-button">
+                        <a type="button" class="btn" href="{% url 'main:ai_solutions' 1 %}" role="button">Shop now <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm content2-div">
+                    <img class="our-mission-img" id="our_mission_img" src="{% static 'img/image-10@2x.png' %}"
+                         alt="Our Mission"/>
+                </div>
+                <div class="col-sm content2-div" id="our_mission">
+                    <div class="content2-text">
+                        <h1>Our Mission</h1>
+                        <p>Based on the current understanding of the current status and needs of the family planting
+                            industry in North America and even around the world, our company has designed and developed
+                            a
+                            set of artificial intelligence to automatically identify each Flowers and trees and their
+                            growth
+                            status, combined with real-time geographic and climate conditions, using big data analysis
+                            and
+                            timely prediction and guidance on the healthy growth conditions of flowers and trees.
+                            <br/>
+                            We make the family planting industry truly intelligent. This technology can save energy and
+                            resources, reduce pollution, improve quality and reduce costs and can even be easily applied
+                            to
+                            fields such as precision agricultural planting to improve the quality and output of economic
+                            crops.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" style="background-color: #e8e7e3">
+            <div class="row">
+                <div class="col-sm content2-div" id="our_product">
+                    <div class="content2-text">
+                        <h1>Our Product</h1>
+                        <p>Based on our investigation on the current status and needs of family-panting industry in the
+                            US
+                            and even around the world, as well as the recent technology development trends and the our
+                            precise insight of the market, our company has designed a set of automatic identification
+                            system
+                            of various plants, their growth, disease, and pests using artificial intelligence. Our
+                            product
+                            combined real-time environment, geography, climate and other conditions to timely make
+                            prediction and to guide people to keep their plants healthy.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm content2-div" id="our_product_img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content3-white" id="expert_consultation">
+        <div class="content3-white-text base-container">
+            <h1>One-to-one Expert Consultation</h1>
+            <p>
+                We have experts waiting for answering all your questions about your lovely plants. They provides
+                treatment
+                plans for corresponding disease and keeps your plants healthy.
+            </p>
+        </div>
+    </div>
+    <div class="content3-green">
+        <div class="content3-green-text base-container" id="forum">
+            <h1>Forum</h1>
+            <p>
+                A forum to share share your plants and your planting experience. You can interact with millions of
+                other
+                users on our platform.
+            </p>
+        </div>
+    </div>
+    <div class="content3-white">
+        <div class="content3-white-text base-container" id="online_shopping">
+            <h1>Online Shopping</h1>
+            <p>
+                Buy safe and high-quality medicines, fertilizers, and other accessories. Add items to the shopping carts
+                or
+                save for later. Pay with WeChat or Alipay, easy and safe.
+            </p>
+        </div>
+    </div>
+    <div class="content3-green">
+        <div class="content3-green-text base-container" id="sharing">
+            <h1>Sharing</h1>
+            <p>
+                Share our website or App to other platform. Planting with family and friends.
+            </p>
+        </div>
+    </div>
+{% endblock %}

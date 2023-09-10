@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/consulting.css' %}"/>
+{% endblock %}
+{% block title %}Consulting{% endblock %}
+{% block head_script %}
+
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link title1 active" href="{% url 'main:consulting' %}">Consulting</a>
+</li>
+    <a class="nav-link title2" style="margin-left: 20%;" href="{% url 'main:create_post' %}">New Post</a>
+    <a class="nav-link title2" style="margin-left: 20%;" href="https://visionx.org/teams.html">Our Experts</a>
+    
+    
+{% endblock %}
+
+{% load tz %}
+
+{% block content %}
+<!--style="background-image:linear-gradient(to right, rgba(26, 188, 156, 1) 0%, rgba(142, 68, 173, 1) 100%);-->
+<div>
+<br/>
+<div class="container">
+    
+    <ul>
+        <tr>
+            <h2>Welcome {{request.session.username}} !</h2>
+            <small>Want to share or ask questions? Create your post here👉<form style="display:inline-block;" action="{% url 'main:create_post' %}">
+            <button style="box-shadow: 0 0 30px 0 rgba(26, 188, 156, 1),0 0 30px 0 rgba(26, 188, 156, 1),0 0 10px 0 rgba(26, 188, 156, 1) inset;background-color: unset;">New Post</button> </form></small>
+            
+            <div style="text-align: right;">
+                <strong>Sort By</strong> : 
+                <a style="background-color: unset; color: unset;" class="btn btn-primary" href="{% url 'main:reverse_post' %}">Newest to Oldest</a>
+                
+                <a style="background-color: unset; color: unset;" class="btn btn-primary" href="{% url 'main:hot_post' %}">Hot</a>
+                
+                <a style="background-color: unset; color: unset;" class="btn btn-primary" href="{% url 'main:sorted_post' %}">Oldest to Newest</a>
+                
+            </div>
+
+            <HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="100%" color=#987cb9 SIZE=3>
+            
+            {% for post in object_list %}
+            
+            <div class="card" style="background-color:unset">
+                <div class="card-header">
+                    <h3><a
+                        style="color:black;text-decoration: none"
+                        href="{% url 'main:post_detail' post.pk %}">{{post.title}} 
+                        <span class="expert-show">  
+                                {% if post.status %} 
+                                    {{post.author}}
+                                    <img src="{% static 'img/expert-certification.png' %}" alt="Expert-certification"width="20" height="20">
+                                {% endif %}
+                        </span>
+                        
+                        <br>
+                        <span class="fa fa-star {% if post.average_rating > 0 %} checked {% endif %}"></span>
+                        <span class="fa fa-star {% if post.average_rating > 1 %} checked {% endif %}"></span>
+                        <span class="fa fa-star {% if post.average_rating > 2 %} checked {% endif %}"></span>
+                        <span class="fa fa-star {% if post.average_rating > 3 %} checked {% endif %}" ></span>
+                        <span class="fa fa-star {% if post.average_rating > 4 %} checked {% endif %}"></span>
+                        <span> {{post.average_rating}} out of 5</span>
+                      
+                    </a></h3>
+                </div>
+                
+                <div >
+                    &nbsp;
+                    <small>
+                        Likes:<i> {{post.num_likes}}</i>
+                        &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+                        Comments:<i>{{post.num_comments}}</i>
+                        &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+                        Views:<i> {{post.post_views}}</i>
+                        &nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+                        Created by:<i> {{ post.author }}</i>
+                        <div style="float:right; display: inline-block;">
+                        Created at:<i> {{ post.date_added|utc }}(UTC)</i> </div>
+                    </small>
+                <!--<HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="96%" color=#987cb9 SIZE=3>
+                -->
+                </div>
+            </div>
+            <br/>
+        </tr>
+            
+        {% endfor %}
+        <br/><br/>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ai_solutions.css' %}"/>
+    <!--
+        <link rel="stylesheet" type="text/css" href="{% static 'css/sub_ai_solutions.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/smart_curtain_animation.css' %}"/>
+    -->
+{% endblock %}
+{% block title %}Virtual Reality Forest Therapy{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Smart Home
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:smart_curtain' 1 %}">Smart Curtain</a></li>
+            <li><a class="dropdown-item" href="#">Sensing System</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">AI Classification</a></li>
+            <li><a class="dropdown-item" href="{% url 'main:ai_disease_diagnose' 1 %}">AI Disease Diagnose</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Forest Therapy
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:virtual_reality_forest_therapy' 1 %}">Virtual Reality Forest
+                Therapy</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Monthly Service Product</a></li>
+
+                <li><a class="dropdown-item" href="#">International FT Tour</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">Small Farmers</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div id="content1" class="content1">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            {% if first_promotion_product %}
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                        aria-current="true"></button>
+            {% endif %}
+            {% for i in promotion_product_num %}
+                <button type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide-to="{{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% if first_promotion_product %}
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <div class="container-fluid base-container">
+                        <div class="row">
+                            <div class="col-md-8 content1-div">
+                                <img class="recommend-item-img"
+                                     src="{{ MEDIA_URL }}{{ first_promotion_product.image }}"
+                                     alt="Item">
+                            </div>
+                            <div class="col-md-4 content1-div-left">
+                                <div class="content1-text">
+                                    <h1 class="new">
+                                        {{ first_promotion_product.description|linebreaks }}
+                                    </h1>
+                                    <h1 class="description">
+                                        <ul>
+                                            <li><h3>Intelligent Sensing</h3></li>
+                                            <li><h3>Artificial Intelligence</h3></li>
+                                            <li><h3>Metaverse</h3></li>
+                                            <li><h3>International Advanced Forest Health Theory</h3></li>
+                                        </ul>
+
+                                    </h1>
+                                    <br/>
+                                    <div>
+                                    <a style="display: inline;" type="btn btn-primary add-to-cart" class="btn btn-primary add-to-cart" href="{% url 'main:vr_detail' %}">See the detail</a>
+                                    <br/><br/>
+                                    <a style="display: inline;" type="btn btn-primary add-to-cart" class="btn btn-primary add-to-cart" href="#content22">See our products </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% for product in VR_product_list %}
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class="container-fluid base-container">
+                        <div class="row">
+                            <div class="col-md-8 content1-div">
+                                <img class="recommend-item-img" src="{{ MEDIA_URL }}{{ product.image }}"
+                                     alt="Item">
+                            </div>
+                            <div class="col-md-4 content1-div-left">
+                                <div class="content1-text">
+
+                                    <h1 class="new">
+                                        {{ product.description|linebreaks }}
+                                    </h1>
+
+                                    {%if "VR Forest Therapy Can Do" in product.description%}
+                                    <h1 class="description">
+                                    <ul>
+                                        <li>Treatment</li>
+                                        <li>Prevention</li>
+                                        <li>Recovery</li>
+                                        <li>Fitness</li>
+                                    </ul>
+                                    </h1>
+                                    {%endif%}
+
+
+                                    {%if "Redefining AI Business" in product.description%}
+                                    <h1><a style="color: #f58b00;" href="https://visionx.org">VisionX</a></h1>
+                                    <h1 class="description">Committed to building a universal digital twin platform, to strengthen our forest health industry!</h1>
+                                    {%endif%}
+
+                                    {%if "Why Forest Health?" in product.description%}
+                                    <h1 class="description">Good for our both Psychological Health & Physical Health</h1>
+                                    {%endif%}
+                                    {%if "Digital Twin" in product.description and "Forest Therapy" in product.description%}
+                                    <br/><a type="btn btn-primary add-to-cart" class="btn btn-primary add-to-cart" href="{% url 'main:digital_twin' %}">See the detail</a>
+                                    {%endif%}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<a name="content22"></a>
+<div class="content2">
+    <div class="container-fluid base-container">
+        <h1 class="best-seller">Best Seller</h1>
+        <div class="row">
+            {% for product in product_list %}
+                <div class="col-sm-6 col-lg-4 col-xl-3 content2-div">
+                    <img class="item-img" src="{{ MEDIA_URL }}{{ product.image }}" alt="Item">
+                    <div class="content2-div-text">
+                        <h5>
+                            {{ product.description }}
+                        </h5>
+                        <div class="ratings">
+                            {% for rating in product.rating %}
+                                <i class="fa fa-star rating-color"></i>
+                            {% endfor %}
+                            {% for zeroRating in product.zeroRating %}
+                                <i class="fa fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <h5>Price: ${{ product.price }}</h5>
+                        <button type="button" class="btn btn-primary add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row page-nav">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-lg justify-content-center" id="pagination">
+                    {% if pagination.previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'main:virtual_reality_forest_therapy' pagination.previous_page %}">Previous</a>
+                        </li>
+                    {% endif %}
+                    {% for page in pagination.left %}
+                        {% if page == pagination.current %}
+                            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{% url 'main:virtual_reality_forest_therapy' page %}">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="page-item"><span class="page-link">...</span></li>
+                    {% if 0 != pagination.right and  pagination.right > pagination.current %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="{% url 'main:virtual_reality_forest_therapy' pagination.right %}">{{ pagination.right }}</a>
+                        </li>
+                    {% endif %}
+                    {% if pagination.next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'main:virtual_reality_forest_therapy' pagination.next_page %}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

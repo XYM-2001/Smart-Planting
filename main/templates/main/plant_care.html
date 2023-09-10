@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/> 
+{% endblock %}
+{% block title %}SmartPlanting{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand active" href="{% url 'main:index' %}">SmartPlanting</a>
+    <span class="vl hide-vl"></span><br>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title1" href="{% url 'main:consulting' %}">Consulting</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title1" href="#">Third Party</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<script>
+	function clickAlert() {
+	  alert("Request submitted!\nOur Experts will diagnose and contact you as soon as possible!");
+  }
+</script>
+
+<body class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" >
+	<br/><br/>
+	<div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+	  <!--Main Col-->
+	  <div id="profile" class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
+        
+		  <div style="background-color: #f5f5f5;" class="p-4 md:p-12 lg:text-left">
+			  <!-- Image for mobile view-->
+              <form style=" margin-left: auto;margin-right: auto;" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div style="color: red;">
+                    {{ field.label_tag }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field }}
+                    <br/><br/>
+                </div>
+                {% endfor%}
+                
+                </form>
+                <br/>
+			  
+			  <!-- Use https://simpleicons.org/ to find the svg for your preferred product --> 
+  
+		  </div>
+  
+	  </div>
+	  
+	  <!--Img Col-->
+	  <div class="w-full lg:w-2/5">
+		  <!-- Big profile image for side bar (desktop) -->
+		  <img src="{{plant.url}}" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
+		  <!-- Image from: http://unsplash.com/photos/MP0IUfwrn0A -->
+		  
+	  </div>
+	  
+	  <!-- Pin to top right corner -->
+		<div class="absolute top-0 right-0 h-12 w-18 p-4">
+		  <button class="js-change-theme focus:outline-none">🌙</button>
+		</div>
+  
+  </div>
+  
+	  <script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+	  <script src="https://unpkg.com/tippy.js@4"></script>
+	  <script>
+		  //Init tooltips
+		  tippy('.link',{
+			placement: 'bottom'
+		  })
+  
+		  //Toggle mode
+		  const toggle = document.querySelector('.js-change-theme');
+		  const body = document.querySelector('body');
+		  const profile = document.getElementById('profile');
+		  
+		  
+		  toggle.addEventListener('click', () => {
+  
+			if (body.classList.contains('text-gray-900')) {
+			  toggle.innerHTML = "☀️";
+			  body.classList.remove('text-gray-900');
+			  body.classList.add('text-gray-100');
+			  profile.classList.remove('bg-white');
+			  profile.classList.add('bg-gray-900');
+			} else
+			{
+			  toggle.innerHTML = "🌙";
+			  body.classList.remove('text-gray-100');
+			  body.classList.add('text-gray-900');
+			  profile.classList.remove('bg-gray-900');			
+			  profile.classList.add('bg-white');
+			  
+			}
+		  });
+		  
+	  </script>
+	  <br/><br/>
+</body>
+
+<button type="submit" class="bg-green-700 hover:bg-green-900 text-white font-bold py-1.5 px-3 rounded-full" onclick="clickAlert()">Health diagnosis</button>
+
+    <div class="content1">
+        <div class="container-fluid base-container intro smart-curtain-intro">
+            <div class="pic-upload">
+                <h1 class="ai-classification-title">AI Plant Disease Diagnose</h1>
+                <h3 class="ai-classification-description">Put a image of the plants here and diagnose their diseases</h3>
+
+                <div>
+                    {% if success %}
+                        <img alt="No picture uploaded yet" src={{ MEDIA_URL }}{{ result_path }} height="500">
+                        <hr class="part-divider">
+                        <div class="result explanation">
+                            <h5> This is the Diagnostic results:</h5>
+                            {% if have_result %}
+                                {% for disease in result_list %}
+                                    <h6> {{disease}} </h6>
+                                {% endfor %}
+                            {% else %}
+                                <h6> We haven't found any disease in your plant image uploaded </h6>
+                            {% endif %}
+                        </div>
+                        <hr class="part-divider">
+                    {% else %}
+                        {% comment %} <img src="/static/img/no_image_uploaded.jpg" width="500"> {% endcomment %}
+                        <h6> {{err_msg}} </h6>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <form method="post" action="{% url 'main:pichandle_yolov5' %}" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <input type="file" name="pic"/><br>
+                        <input type="submit" name="shallow" value="Show Most Likely Results"><br>
+                        <input type="submit" name="deep" value="Show All Possible Results"><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

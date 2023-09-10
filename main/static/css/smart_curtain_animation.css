@@ -1,0 +1,106 @@
+.animation {
+    width: 100%;
+    height: 100vh;
+    animation-name: opacity;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    /*background: linear-gradient(0.25turn, #949494, #eee, #949494);*/
+    background: #ffffff;
+}
+
+.curtain-animation {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+/*.animation-left {*/
+/*    float: left;*/
+/*    width: 50%;*/
+/*    height: 100%;*/
+/*    background: linear-gradient(to right, #000, #333, #949494, #cecece);*/
+/*    background-size: 800% 800%;*/
+/*    animation: openCurtain-left 5s, translate-left 8s;*/
+/*    animation-fill-mode: forwards;*/
+/*}*/
+
+/*.animation-right {*/
+/*    float: right;*/
+/*    width: 50%;*/
+/*    height: 100%;*/
+/*    background: linear-gradient(to left, #000, #333, #949494);*/
+/*    background-size: 100% 100%;*/
+/*    animation: openCurtain-right 5s, translate-right 8s;*/
+/*    animation-fill-mode: forwards;*/
+/*}*/
+
+.animation-left {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-image: url('../img/curtain-left.jpg');
+    background-size: cover;
+    animation: translate-left 8s;
+    animation-fill-mode: forwards;
+}
+
+.animation-right {
+    float: right;
+    width: 50%;
+    height: 100%;
+    background-image: url('../img/curtain-right.jpg');
+    background-size: cover;
+    animation: translate-right 8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes openCurtain-left {
+    0% {
+        background-position: 0 50%
+    }
+    50% {
+        background-position: 50% 50%
+    }
+    100% {
+        background-position: 100% 50%
+    }
+}
+
+@keyframes openCurtain-right {
+    0% {
+        background-position: 100% 50%
+    }
+    50% {
+        background-position: 50% 50%
+    }
+    100% {
+        background-position: 0 50%
+    }
+}
+
+
+@keyframes translate-left {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes translate-right {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes opacity {
+    to {
+        opacity: 0;
+    }
+    100% {
+        display: none;
+    }
+}

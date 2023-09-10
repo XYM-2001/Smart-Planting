@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/consulting.css' %}"/>
+{% endblock %}
+{% block title %}Comment On Post{% endblock %}
+{% block head_script %}
+
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:consulting' %}">Consulting</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="{% url 'main:create_post' %}">New Post</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div>
+<div
+    style="margin-left: auto;margin-right: auto;">
+    
+    <ul>
+        <br/>
+        <h1 style="text-align:center">
+            Adding Comment...
+        </h1>
+
+
+        <br/>
+        <br/>
+        <div class="form-group" style="text-align:center">
+        <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        {{ field.label_tag }}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+             {{ field }}
+            <br/>
+            <br/>
+        </div>
+        {% endfor%}
+            <button>Add Comment</button>
+        </form>
+        <br/><br/>
+        <a href="{% url 'main:consulting' %}">Cancel</a>
+        </div>
+
+        
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,248 @@
+.breadcrumb {
+    padding-top: 1%;
+}
+
+.content1 .intro {
+    height: 617px;
+    background-size: cover;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content1 .smart-curtain-intro {
+    background-image: url('../img/smart_curtain.png');
+}
+
+.content1 .virtual-reality-forest-therapy-intro {
+    background-image: url('../img/virtual_reality_forest_therapy.jpg');
+}
+
+.content1 .smart-curtain {
+    text-align: center;
+}
+
+.content1 .smart-curtain-title {
+    margin-bottom: 5%;
+    font-family: SF Pro Display, sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 149.84%;
+    letter-spacing: 0.0135em;
+}
+
+.content1 .smart-curtain-description {
+    font-family: SF Pro Display, sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    letter-spacing: 0.0285em;
+}
+
+.content1 .smart-curtain-button a {
+    font-size: 24px;
+    font-style: normal;
+    letter-spacing: 0.00px;
+    font-family: SF Pro Display, sans-serif;
+    font-weight: 800;
+    margin: 8% 3% 0 3%;
+}
+
+.light-display {
+    margin: 5% 0;
+    height: 750px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-display .light-img {
+    height: 100%;
+    background-size: cover;
+    background-image: url('../img/plant.jpg');
+}
+
+.light-display .canopy {
+    height: 750px;
+    margin-top: -750px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-display .shadow-left {
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(90deg, #333 100%, transparent 0);
+    opacity: 0.75;
+}
+
+.light-display .shadow-right {
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(270deg, #333 100%, transparent 0);
+    opacity: 0.75;
+}
+
+.light-display .light {
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(-45deg, transparent 12px, #ffffff 0) right,
+    linear-gradient(90deg, transparent 50%, #ffffff 0) left;
+    width: 100%;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+}
+
+.light-display .progress {
+    justify-content: center;
+    background-color: transparent;
+    margin: 1% 0;
+}
+
+.content1 .buy-now {
+    background-color: #007AFF;
+    color: #ffffff;
+    border-radius: 32px;
+    width: 160px;
+    height: 52px;
+    margin: 0;
+}
+
+.content1 .learn-more {
+    color: #007AFF;
+}
+
+@media (max-width: 1600px) {
+    .content1 .intro {
+        height: 514px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .content1 .intro {
+        height: 450px;
+    }
+
+    .content1 .smart-curtain-title {
+        font-size: 45px;
+    }
+
+    .content1 .smart-curtain-description {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .content1 .intro {
+        height: 386px;
+    }
+
+    .content1 .smart-curtain-title {
+        font-size: 42px;
+    }
+
+    .content1 .smart-curtain-description {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 992px) {
+    .content1 .intro {
+        height: 319px;
+    }
+
+    .content1 .smart-curtain-title {
+        font-size: 35px;
+    }
+
+    .content1 .smart-curtain-description {
+        font-size: 24px;
+    }
+
+    .content1 .smart-curtain-button a {
+        font-size: 15px;
+        margin-top: 5%;
+    }
+
+    .content1 .buy-now {
+        width: 110px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content1 .intro {
+        height: 247px;
+    }
+
+    .content1 .smart-curtain-title {
+        font-size: 30px;
+        margin-bottom: 3%;
+    }
+
+    .content1 .smart-curtain-description {
+        font-size: 20px;
+    }
+
+    .content1 .virtual-reality-forest-therapy-description {
+        font-size: 20px;
+    }
+
+    .content1 .smart-curtain-button a {
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .content1 .intro {
+        height: 154px;
+    }
+
+    .content1 .smart-curtain-title {
+        font-size: 20px;
+        margin-bottom: 2%;
+    }
+
+    .content1 .smart-curtain-description {
+        font-size: 14px;
+    }
+
+    .content1 .virtual-reality-forest-therapy-description {
+        font-size: 14px;
+    }
+
+    .content1 .smart-curtain-button a {
+        font-size: 12px;
+        margin-top: 2%;
+    }
+
+    .content1 .buy-now {
+        border-radius: 28px;
+        width: 80px;
+        height: 33px;
+    }
+}
+
+@media (max-width: 360px) {
+    .content1 .smart-curtain-title {
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+
+    .content1 .smart-curtain-description {
+        font-size: 13px;
+    }
+
+    .content1 .virtual-reality-forest-therapy-description {
+        font-size: 13px;
+    }
+
+    .content1 .smart-curtain-button a {
+        margin-top: 0;
+    }
+}

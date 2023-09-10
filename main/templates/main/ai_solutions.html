@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ai_solutions.css' %}"/>
+{% endblock %}
+{% block title %}AI Solutions{% endblock %}
+{% block head_script %}
+    <script>
+        function loadData() {
+            let xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    document.getElementById("cart").innerHTML = "                                                            <li><span class=\"dropdown-header\"><i class=\"fas fa-shopping-cart\"></i> Cart</span></li>\n" +
+                        "                                                            <li>\n" +
+                        "                                                                <hr class=\"dropdown-divider\">\n" +
+                        "                                                            </li>\n" +
+                        "                                                            <li><p class=\"dropdown-item\"> " + xmlhttp.responseText + "</p></li>\n" +
+                        "                                                            <li>\n" +
+                        "                                                                <hr class=\"dropdown-divider\">\n" +
+                        "                                                            </li>\n" +
+                        "                                                            <li><a class=\"dropdown-item\" href=\"#\">Go to Cart</a></li>"
+                }
+            }
+            xmlhttp.open("GET", "http://127.0.0.1:3000/", true);
+            xmlhttp.send();
+        }
+    </script>
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Smart Home
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:smart_curtain' 1 %}">Smart Curtain</a></li>
+            <li><a class="dropdown-item" href="#">Sensing System</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="{% url 'main:ai_classification' %}">AI Classification</a></li>
+	    <li><a class="dropdown-item" href="{% url 'main:aidiseasediagnose' %}">AI Disease Diagnose</a></li> 
+	</ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Forest Therapy
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:virtual_reality_forest_therapy' 1 %}">Virtual Reality Forest
+                Therapy</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Monthly Service Product</a></li>
+            <li><a class="dropdown-item" href="#">International FT Tour</a></li>
+
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">Small Farmers</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="content1">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% if first_promotion_product %}
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true"></button>
+                {% endif %}
+                {% for i in promotion_product_num %}
+                    <button type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide-to="{{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% if first_promotion_product %}
+                    <div class="carousel-item active" data-bs-interval="5000">
+                        <div class="container-fluid base-container">
+                            <div class="row">
+                                <div class="col-md-8 content1-div">
+                                    <img class="recommend-item-img"
+                                         src="{{ MEDIA_URL }}{{ first_promotion_product.image }}"
+                                         alt="Item">
+                                </div>
+                                <div class="col-md-4 content1-div-left">
+                                    <div class="content1-text">
+                                        <h5 class="new">New</h5>
+                                        <h1 class="description">
+                                            {{ first_promotion_product.description }}
+                                        </h1>
+                                        <p class="price">From ${{ first_promotion_product.price }}</p>
+                                        <button type="button" class="btn btn-primary add-to-cart" onclick="loadData()">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% for product in promotion_product_list %}
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <div class="container-fluid base-container">
+                            <div class="row">
+                                <div class="col-md-8 content1-div">
+                                    <img class="recommend-item-img" src="{{ MEDIA_URL }}{{ product.image }}"
+                                         alt="Item">
+                                </div>
+                                <div class="col-md-4 content1-div-left">
+                                    <div class="content1-text">
+                                        <h5 class="new">New</h5>
+                                        <h1 class="description">
+                                            {{ product.description }}
+                                        </h1>
+                                        <p class="price">From ${{ product.price }}</p>
+                                        <button type="button" class="btn btn-primary add-to-cart">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="content2">
+        <div class="container-fluid base-container">
+            <h1 class="best-seller">Best Seller</h1>
+            <div class="row">
+                {% for product in product_list %}
+                    <div class="col-sm-6 col-lg-4 col-xl-3 content2-div">
+                        <img class="item-img" src="{{ MEDIA_URL }}{{ product.image }}" alt="Item">
+                        <div class="content2-div-text">
+                            <h5>
+                                {{ product.description }}
+                            </h5>
+                            <div class="ratings">
+                                {% for rating in product.rating %}
+                                    <i class="fa fa-star rating-color"></i>
+                                {% endfor %}
+                                {% for zeroRating in product.zeroRating %}
+                                    <i class="fa fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            <h5>Price: ${{ product.price }}</h5>
+                            <button type="button" class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row page-nav">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg justify-content-center" id="pagination">
+                        {% if pagination.previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'main:ai_solutions' pagination.previous_page %}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for page in pagination.left %}
+                            {% if page == pagination.current %}
+                                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="{% url 'main:ai_solutions' page %}">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="page-item"><span class="page-link">...</span></li>
+                        {% if 0 != pagination.right and  pagination.right > pagination.current %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{% url 'main:ai_solutions' pagination.right %}">{{ pagination.right }}</a>
+                            </li>
+                        {% endif %}
+                        {% if pagination.next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'main:ai_solutions' pagination.next_page %}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}

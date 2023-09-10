@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/consulting.css' %}"/>
+{% endblock %}
+{% block title %}Consulting{% endblock %}
+{% block head_script %}
+
+{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:consulting' %}">Consulting</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">New Post</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div>
+<div style="margin-left: 20%;margin-right: 20%;">
+    <h1 style="text-align: center;">Hi {{request.session.username}}, </h1>
+    <h1 style="text-align: center;">You are creating a new Post...</h1>
+    <br/>
+    <form style="margin-left: auto;margin-right: auto;"  enctype="multipart/form-data" method="POST">
+        
+        {% csrf_token %}
+        {% for field in form %}
+
+        {{ field.label_tag }}
+        {% if 'image' in field.label_tag %}
+            (Optional)
+        {% endif %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field }}
+            <br/>
+            <br/>
+        </div>
+        {% endfor %}
+        <button>Post</button>
+        <br/>
+        <br/>
+    </form>
+    <a href="{% url 'main:consulting' %}">Back</a>
+    </div>
+    <br/><br/>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block resource %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/ai_solutions.css' %}"/> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/sub_ai_solutions.css' %}"/> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/smart_curtain_animation.css' %}"/> -->
+{% endblock %}
+{% block title %}AI Classification{% endblock %}
+
+{% block nav_brand %}
+    <a class="navbar-brand" href="{% url 'main:index' %}" style="color: #dedede">SmartPlanting</a>
+    <span class="vl"></span>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link title1 active" href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Smart Home
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:smart_curtain' 1 %}">Smart Curtain</a></li>
+            <li><a class="dropdown-item" href="#">Sensing System</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">AI Classification</a></li>
+            <li><a class="dropdown-item" href="{% url 'main:aidiseasediagnose' %}">AI Disease Dignose</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle title2" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Forest Therapy
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="{% url 'main:virtual_reality_forest_therapy' 1 %}">Virtual Reality Forest
+                Therapy</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Monthly Service Product</a></li>
+
+                <li><a class="dropdown-item" href="#">International FT Tour</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link title2" href="#">Small Farmers</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid base-container">
+    <!-- 第一行对齐 -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'main:ai_solutions' 1 %}">AI Solutions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">AI Disease Diagnose</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="content1">
+        <div class="container-fluid base-container intro smart-curtain-intro">
+            <div class="pic-upload">
+                <h1 class="ai-classification-title">AI Plant Disease Diagnose</h1>
+                <h3 class="ai-classification-description">Put a image of the plants here and diagnose their diseases</h3>
+
+                <div>
+                    {% if success %}
+                        <img alt="No picture uploaded yet" src={{ MEDIA_URL }}{{ result_path }} height="500">
+                        <hr class="part-divider">
+                        <div class="result explanation">
+                            <h5> This is the Diagnostic results:</h5>
+                            {% if have_result %}
+                                {% for disease in result_list %}
+                                    <h6> {{disease}} </h6>
+                                {% endfor %}
+                            {% else %}
+                                <h6> We haven't found any disease in your plant image uploaded </h6>
+                            {% endif %}
+                        </div>
+                        <hr class="part-divider">
+                    {% else %}
+                        {% comment %} <img src="/static/img/no_image_uploaded.jpg" width="500"> {% endcomment %}
+                        <h6> {{err_msg}} </h6>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <form method="post" action="{% url 'main:pichandle_yolov5' %}" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <input type="file" name="pic"/><br>
+                        <input type="submit" name="shallow" value="Show Most Likely Results"><br>
+                        <input type="submit" name="deep" value="Show All Possible Results"><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        setTimeout(function () {
+            document.getElementById("animation").style.display = "none";
+            document.getElementById("animation2").style.display = "none";
+        }, 7000);
+
+        document.getElementById("lightness").addEventListener('input', (event) => {
+            var percentage = parseInt(event.target.value);
+            if (percentage < 50) {
+                document.getElementById("shadow-left").style.background = "linear-gradient(" + (percentage / 2 + 90) + "deg, #333 " + (100 - percentage) + "%, transparent " + percentage + "%)";
+                document.getElementById("shadow-right").style.background = "linear-gradient(" + (-(percentage / 2 + 90)) + "deg, #333 " + (100 - percentage) + "%, transparent " + percentage + "%)";
+            } else {
+                document.getElementById("shadow-left").style.background = "linear-gradient(" + (percentage / 2 + 90) + "deg, #333 " + (100 - percentage) + "%, transparent 0";
+                document.getElementById("shadow-right").style.background = "linear-gradient(" + (-(percentage / 2 + 90)) + "deg, #333 " + (100 - percentage) + "%, transparent 0";
+            }
+        });
+    </script>
+{% endblock %}
