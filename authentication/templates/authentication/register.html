@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Register</title>
+</head>
+
+<body>
+<div class="main">
+    <p class="sign" align="center">Register</p>
+    <p class="expert_jump" align="center">if you are expert, please click <a href= "{% url 'authentication:expert' %}">here</a></p>
+    <form class="form1" action="{% url 'authentication:register' %}" method="post">
+        {% if message %}
+            <p align="center" >{{ message }}</p>
+        {% endif %}
+        {% csrf_token %}
+        <input class="un " type="text" align="center" placeholder="Username" name='username'>
+        <input class="un " type="text" align="center" placeholder="Email" name='email'>
+        <input class="pass" type="password" align="center" placeholder="Password" name='password'>
+        <button class="submit" align="center">Register</button>
+        <p class="forgot" align="center"><a href="{% url 'authentication:login' %}">Sign in</a></p>
+    </form>
+</div>
+</body>
+</html>

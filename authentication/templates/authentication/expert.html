@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/expert.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="form-container">
+        <p class="sign" align="center">Register</p>
+        <form action="{% url 'authentication:expert' %}" method="post">
+            {% if message %}
+                <p align="center" >{{ message }}</p>
+            {% endif %}
+            {% csrf_token %}
+            <div>
+                <label class="form-label" for="username">Username:</label>
+                <input class="form-input" type="text" align="center" placeholder="Username" name='username'>
+            </div>
+            <div>
+                <label class="form-label" for="password">Password:</label>
+                <input class="form-input" type="password" align="center" placeholder="Password" name='password'>
+            </div>
+            <div>
+                <label class="form-label" for="full_name">Full Name:</label>
+                <input class="form-input" type="text" id="full_name" name="full_name">
+            </div>
+            <div>
+                <label class="form-label" for="email">Email Address:</label>
+                <input class="form-input" type="email" id="email" name="email">
+            </div>
+            <div>
+                <label class="form-label" for="phone_number">Phone Number:</label>
+                <input class="form-input" type="tel" id="phone_number" name="phone_number">
+            </div>
+            <div>
+                <label class="form-label" for="expertise">Areas of expertise:</label>
+                <span class="form-description">(Please List your areas of expertise, including any relevant degrees or certifications.)
+                <textarea class="form-input" id="expertise" name="expertise"></textarea>
+            </div>
+            <div>
+                <label class="form-label" for="experience">Professional Experience:</label>
+                <span class="form-description">(Please list your relevant professional experienc, including any notable achievements or accomplishments.)
+                <textarea class="form-input" id="experience" name="experience"></textarea>
+            </div>
+            <div>
+                <label class="form-label" for="availability">Availability:</label>
+                <span class="form-description">(Please indicate your availability for consultations or project work.)
+                <input class="form-input" type="text" id="availability" name="availability">
+            </div>
+            <div>
+                <label class="form-label" for="references">Reference:</label>
+                <span class="form-description">(Please indicate your availability for consultations or project work.)
+                <textarea class="form-input" id="references" name="references"></textarea>
+            </div>
+            <input class="form-submit" type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
